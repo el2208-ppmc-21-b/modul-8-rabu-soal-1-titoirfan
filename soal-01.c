@@ -1,15 +1,5 @@
-/** EL2208 Praktikum Pemecahan Masalah dengan C 2020/2021
-*   Modul               : 
-*   Soal                : 
-*   Hari dan Tanggal    : 
-*   Nama (NIM)          : 
-*   Asisten (NIM)       : 
-*   Nama File           : 
-*   Deskripsi           : 
-*/
-
 /*
-    Template Kode M8
+    Usulan Soal M8
     Bucket fill by David Fauzi
 */
 
@@ -18,12 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-/*  INSTRUKSI PENGERJAAN : 
-    fungsi untuk membuat matriks dinamis dan parsing data dari .txt ke matrix telah dibuatkan, 
-    struct Queue beserta isi node nya sudah dibuatkan, fungsi main() juga sudah dibuatkan
-    Praktikan hanya perlu mengisi implementasi fungsi" queue, algoritma utama, dan fungsi display matriks
-*/
 
 // Deklarasi struct
 typedef struct // Simpan koordinat sel matriks
@@ -63,6 +47,7 @@ void displayImage(char **grid, int row, int col);
 /* algoritma utama untuk bucket fill  */
 void bucketFill(char **mat, int matRow, int matCol, int startX, int startY, char replacement);
 
+
 int main()
 {
     char inputUser[100];
@@ -90,34 +75,119 @@ int main()
     return 0;
 }
 
-Queue *createQueue(unsigned capacity)
-{
-    /*Isi implementasi fungsinya disini*/
-}
-
-void enqueue(Queue *queue, queueNode item)
-{ // asumsi tidak ada kasus queue full karena kapasitas sudah di set agar selalu cukup
-
-    /*Isi implementasi fungsinya disini*/
-}
-
-void dequeue(Queue *queue)
-{ // asumsi sudah tidak ada lagi kasus queue empty lalu di dequeue
-
-    /*Isi implementasi fungsinya disini*/
-}
-
-queueNode front(Queue *queue)
-{
-    /*Isi implementasi fungsinya disini*/
-}
-
 void bucketFill(char **mat, int matRow, int matCol, int startX, int startY, char replacement)
 {
-    /*Isi implementasi fungsinya disini*/
+    // 8 movement
+    int row[] = {-1, -1, -1, 0, 0, 1, 1, 1};
+    int col[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+    // Buat queue
+    Queue *q = createQueue(matRow * matCol);
+    // enqueue pixel awal
+    queueNode pixel = {startX, startY};
+    enqueue(q, pixel);
+
+    // color target
+    int target = mat[startX][startY];
+
+    // loop sampai gak nemu node queue baru lagi
+    while (q->size != 0)
+    {
+        // dequeue front node
+        queueNode node = front(q);
+        dequeue(q);
+
+        //  pixel saat ini
+        int x = node.x;
+        int y = node.y;
+
+        // replace the current pixel color with that of replacement
+        mat[x][y] = replacement;
+
+        // looping untuk kedelapan tetangga disekitar pixel
+        for (int k = 0; k < 8; k++)
+        {
+            // jika pixel adjadent (x + row[k], y + col[k]) valid dan
+            // warnanya sama dengan pixel saat ini (yg mau direplace)
+            // maka masukin pixel itu ke queue
+            int xCheck = x + row[k], yCheck = y + col[k];
+            if ((xCheck >= 0 && xCheck < matRow && yCheck >= 0 && yCheck < matCol) &&
+                mat[xCheck][yCheck] == target)
+            {
+                // enqueue adjacent pixel
+                queueNode new = {xCheck, yCheck};
+                enqueue(q, new);
+            }
+        }
+    }
+}
+char **createArr(int row_in, int col_in)
+{
+    char **grid;
+    grid = malloc(row_in * sizeof(int *));
+    for (int i = 0; i < row_in; i++)
+    {
+        grid[i] = malloc(col_in * sizeof(int));
+    }
+    return grid;
+}
+
+char **parseData(int *matrixRow, int *matrixCol, char filename[50])
+{
+    char temp[100];
+    FILE *stream = fopen(filename, "r");
+    fgets(temp, 30, stream);
+    *matrixRow = atoi(temp);
+    fgets(temp, 30, stream);
+    *matrixCol = atoi(temp);
+    char **mat = createArr(*matrixRow, *matrixCol);
+    for (int i = 0; i < *matrixRow; i++)
+    {
+        fgets(temp, 100, stream);
+        for (int j = 0; j < *matrixCol; j++)
+        {
+            mat[i][j] = temp[j];
+        }
+    }
+    fclose(stream);
+    return mat;
 }
 
 void displayImage(char **grid, int row, int col)
 {
-    /*Isi implementasi fungsinya disini*/
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            printf("%c", grid[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
+
+Queue *createQueue(unsigned capacity)
+{
+    Queue *queue = (Queue *)malloc(sizeof(Queue));
+    queue->capacity = capacity;
+    queue->front = queue->size = 0;
+    queue->rear = capacity - 1;
+    queue->array = (queueNode *)malloc(queue->capacity * sizeof(queueNode));
+    return queue;
+}
+
+
+void enqueue(Queue *queue, queueNode item)
+{// asumsi tidak ada kasus queue full karena kapasitas sudah di set agar besar
+    queue->rear = (queue->rear + 1) % queue->capacity;
+    queue->array[queue->rear] = item;
+    queue->size = queue->size + 1;
+}
+
+void dequeue(Queue *queue)
+{ // asumsi tidak ada kasus queue empty lalu di dequeue
+    queueNode item = queue->array[queue->front];
+    queue->front = (queue->front + 1) % queue->capacity;
+    queue->size = queue->size - 1;
+}
+
+queueNode front(Queue *queue) { return queue->array[queue->front]; }

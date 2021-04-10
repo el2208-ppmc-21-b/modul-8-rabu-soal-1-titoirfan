@@ -1,0 +1,104 @@
+{
+  "tests": [
+    {
+      "name": "01",
+      "setup": "make soal-01",
+      "run": "./soal-01",
+      "input": "01.txt\r\n1\r\n1\r\nW",
+      "output": "WWWWWWWWWWWW\r\nWWYYYWWYYYWW\r\nWWYYYWWYYYWW\r\nWWWWWWWWWWWW\r\nWYWWWWWWWWYW\r\nWWYYYYYYYYWW\r\nWWWWWWWWWWWW",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    },
+    {
+      "name": "02",
+      "setup": "",
+      "run": "./soal-01",
+      "input": "01.txt\r\n6\r\n3\r\nG",
+      "output": "XXXXXXXXXXXX\r\nXXYYYXXYYYXX\r\nXXYYYXXYYYXX\r\nXXXXXXXXXXXX\r\nXGXXXXXXXXGX\r\nXXGGGGGGGGXX\r\nXXXXXXXXXXXX",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    },
+    {
+      "name": "03",
+      "setup": "",
+      "run": "./soal-01",
+      "input": "02.txt\r\n1\r\n4\r\nA",
+      "output": "YYYAAAAAAA\r\nYYYYYYAXXX\r\nAAAAAAAXXX\r\nWWWWWAAAAX\r\nWRRRRRAXXX\r\nWWWRRAAXXX\r\nWBWRRRRRRX\r\nWBBBBRRXXX\r\nWBBXBBBBXX\r\nWBBXXXXXXX",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    },
+    {
+      "name": "04",
+      "setup": "",
+      "run": "./soal-01",
+      "input": "02.txt\r\n10\r\n10\r\nY",
+      "output": "YYYGGGGGGG\r\nYYYYYYGYYY\r\nGGGGGGGYYY\r\nWWWWWGGGGY\r\nWRRRRRGYYY\r\nWWWRRGGYYY\r\nWBWRRRRRRY\r\nWBBBBRRYYY\r\nWBBYBBBBYY\r\nWBBYYYYYYY",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    },
+    {
+      "name": "05",
+      "setup": "",
+      "run": "./soal-01",
+      "input": "02.txt\r\n10\r\n1\r\nR",
+      "output": "YYYGGGGGGG\r\nYYYYYYGXXX\r\nGGGGGGGXXX\r\nRRRRRGGGGX\r\nRRRRRRGXXX\r\nRRRRRGGXXX\r\nRBRRRRRRRX\r\nRBBBBRRXXX\r\nRBBXBBBBXX\r\nRBBXXXXXXX",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    },
+    {
+      "name": "06",
+      "setup": "",
+      "run": "./soal-01",
+      "input": "03.txt\r\n1\r\n2\r\nB",
+      "output": "WBWWWWWWBW\r\nWWBWWWWBWW\r\nWWWBWWBWWW\r\nWWWWBBWWWW\r\nWWWWBBWWWW\r\nWWWBWWBWWW\r\nWWBWWWWBWW\r\nWBWWWWWWBW",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    },
+    {
+      "name": "07",
+      "setup": "",
+      "run": "./soal-01",
+      "input": "03.txt\r\n5\r\n1\r\nX",
+      "output": "WRXXXXXXRX\r\nXXRXXXXRXX\r\nXXXRXXRXXX\r\nXXXXRRXXXX\r\nXXXXRRXXXX\r\nXXXRXXRXXX\r\nXXRXXXXRXX\r\nWRXXXXXXRX",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    },
+    {
+      "name": "08",
+      "setup": "",
+      "run": "./soal-01",
+      "input": "04.txt\r\n1\r\n1\r\nG",
+      "output": "G\r\nG\r\nG\r\nB\r\nB\r\nY",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    },
+    {
+      "name": "09",
+      "setup": "",
+      "run": "./soal-01",
+      "input": "05.txt\r\n2\r\n1\r\nX",
+      "output": "GXXXYYYY\r\nXXXXYYYY\r\nAAAAXXXX\r\nAAAAXXXG",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    },
+    {
+      "name": "10",
+      "setup": "",
+      "run": "./soal-01",
+      "input": "05.txt\r\n3\r\n3\r\nB",
+      "output": "GBBBYYYY\r\nBBBBYYYY\r\nBBBBBBBB\r\nBBBBBBBG",
+      "comparison": "included",
+      "timeout": 1,
+      "points": 10
+    }
+  ]
+}

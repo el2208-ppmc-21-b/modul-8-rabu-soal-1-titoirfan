@@ -81,7 +81,7 @@ void bucketFill(char **mat, int matRow, int matCol, int startX, int startY, char
     int row[] = {-1, -1, -1, 0, 0, 1, 1, 1};
     int col[] = {-1, 0, 1, -1, 1, -1, 0, 1};
     // Buat queue
-    Queue *q = createQueue(matRow * matCol);
+    Queue *q = createQueue(300);
     // enqueue pixel awal
     queueNode pixel = {startX, startY};
     enqueue(q, pixel);
